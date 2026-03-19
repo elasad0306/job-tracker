@@ -1,8 +1,20 @@
 <script setup lang="ts">
 import { X } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const emit = defineEmits(['close'])
 
+const form = ref({
+    company: '',
+    role: '',
+    type: '',
+    status: '',
+    city: '',
+    url: '',
+    notes:'',
+    applied_at: new Date().toISOString().split('T')[0]
+
+})
 
 </script>
 
@@ -22,12 +34,13 @@ const emit = defineEmits(['close'])
         <div class="grid grid-cols-2 gap-3">
           <div class="form-control">
             <label class="label"><span class="label-text">Entreprise * </span></label>
-            <input type="text" placeholder="ex: Capgemini" class="input input-bordered input-sm" />
+            <input type="text" v-model="form.company" placeholder="ex: Capgemini" class="input input-bordered input-sm" />
           </div>
           <div class="form-control">
             <label class="label"><span class="label-text">Poste * </span></label>
             <input
               type="text"
+              v-model="form.role"
               placeholder="ex: Développeur Fullstack"
               class="input input-bordered input-sm"
             />
@@ -37,7 +50,7 @@ const emit = defineEmits(['close'])
         <div class="grid grid-cols-2 gap-3">
           <div class="form-control">
             <label class="label"><span class="label-text">Type de contract* </span></label>
-            <select class="select select-bordered select-sm">
+            <select v-model="form.type" class="select select-bordered select-sm">
               <option>Stage</option>
               <option>Alternance</option>
               <option>CDD</option>
@@ -46,7 +59,7 @@ const emit = defineEmits(['close'])
           </div>
           <div class="form-control">
             <label class="label"><span class="label-text">Statut* </span></label>
-            <select class="select select-bordered select-sm">
+            <select v-model="form.status" class="select select-bordered select-sm">
               <option>Entretien</option>
               <option>Envoyée</option>
               <option>Offre</option>
@@ -59,12 +72,13 @@ const emit = defineEmits(['close'])
         <div class="grid grid-cols-2 gap-3">
           <div class="form-control">
             <label class="label"><span class="label-text">Ville * </span></label>
-            <input type="text" placeholder="ex: Capgemini" class="input input-bordered input-sm" />
+            <input type="text" v-model="form.city" placeholder="ex: Capgemini" class="input input-bordered input-sm" />
           </div>
           <div class="form-control">
             <label class="label"><span class="label-text">Date de candidature * </span></label>
             <input
               type="date"
+              v-model="form.applied_at"
               placeholder="ex: Développeur Fullstack"
               class="input input-bordered input-sm"
             />
@@ -74,6 +88,7 @@ const emit = defineEmits(['close'])
           <label class="label"><span class="label-text">Lien de l'offre</span></label>
           <input
             type="url"
+            v-model="form.url"
             placeholder="https://..."
             class="input input-bordered input-sm w-full"
           />
@@ -81,6 +96,7 @@ const emit = defineEmits(['close'])
         <div class="form-control flex flex-col">
           <label class="label"><span class="label-text">Notes</span></label>
           <textarea
+            v-model="form.notes"
             class="textarea textarea-bordered textarea-sm w-full"
             placeholder="Contact RH, impressions…"
           />
