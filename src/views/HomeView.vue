@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import AppHeader from '@/components/AppHeader.vue';
-
-
+import AppHeader from '@/components/AppHeader.vue'
 </script>
 
 <template>
   <header>
-    <AppHeader/>
+    <AppHeader />
   </header>
-  <main>
-
-  </main>
+  <main></main>
 </template>
