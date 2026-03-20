@@ -5,17 +5,15 @@ import { ref } from 'vue'
 const emit = defineEmits(['close'])
 
 const form = ref({
-    company: '',
-    role: '',
-    type: '',
-    status: '',
-    city: '',
-    url: '',
-    notes:'',
-    applied_at: new Date().toISOString().split('T')[0]
-
+  company: '',
+  role: '',
+  type: '',
+  status: '',
+  city: '',
+  url: '',
+  notes: '',
+  applied_at: new Date().toISOString().split('T')[0],
 })
-
 </script>
 
 <template>
@@ -34,7 +32,12 @@ const form = ref({
         <div class="grid grid-cols-2 gap-3">
           <div class="form-control">
             <label class="label"><span class="label-text">Entreprise * </span></label>
-            <input type="text" v-model="form.company" placeholder="ex: Capgemini" class="input input-bordered input-sm" />
+            <input
+              type="text"
+              v-model="form.company"
+              placeholder="ex: Capgemini"
+              class="input input-bordered input-sm"
+            />
           </div>
           <div class="form-control">
             <label class="label"><span class="label-text">Poste * </span></label>
@@ -72,7 +75,12 @@ const form = ref({
         <div class="grid grid-cols-2 gap-3">
           <div class="form-control">
             <label class="label"><span class="label-text">Ville * </span></label>
-            <input type="text" v-model="form.city" placeholder="ex: Capgemini" class="input input-bordered input-sm" />
+            <input
+              type="text"
+              v-model="form.city"
+              placeholder="ex: Capgemini"
+              class="input input-bordered input-sm"
+            />
           </div>
           <div class="form-control">
             <label class="label"><span class="label-text">Date de candidature * </span></label>
