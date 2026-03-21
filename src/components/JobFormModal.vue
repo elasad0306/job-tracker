@@ -1,19 +1,28 @@
 <script setup lang="ts">
 import { X } from 'lucide-vue-next'
 import { ref } from 'vue'
+import { useJobStore } from '@/stores/jobs'
+import type { JobForm } from '@/types/job'
 
 const emit = defineEmits(['close'])
+const store = useJobStore()
 
-const form = ref({
+const form = ref<JobForm>({
   company: '',
   role: '',
-  type: '',
-  status: '',
+  type: 'Stage',
+  status: 'Envoyée',
   city: '',
   url: '',
   notes: '',
-  applied_at: new Date().toISOString().split('T')[0],
+  applied_at: new Date().toISOString().split('T')[0]
 })
+
+async function handleSubmit(){
+  if (!form.value.company || !form.value.role ) return 
+  await store.addJob(form.value)
+  emit('close')
+}
 </script>
 
 <template>
@@ -114,7 +123,11 @@ const form = ref({
       <!-- Bouttons -->
       <div class="modal-action">
         <button class="btn btn-ghost rounded-xl" @click="emit('close')">Annuler</button>
-        <button class="btn bg-emerald-300 rounded-xl hover:bg-[#4ade80] text-gray-950">
+        <button 
+        class="btn bg-emerald-300 rounded-xl hover:bg-[#4ade80] text-gray-950"
+        :disabled="!form.company || !form.role"
+        @click="handleSubmit"
+        >
           Enregistrer
         </button>
       </div>
