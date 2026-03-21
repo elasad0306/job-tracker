@@ -1,6 +1,6 @@
 export type JobType = 'Stage' | 'Alternance' | 'CDI' | 'CDD'
 
-export type JobStatus = 'Envoyéé' | 'Vue' | 'Entretien' | 'Offre' | 'Refus'
+export type JobStatus = 'Envoyée' | 'Vue' | 'Entretien' | 'Offre' | 'Refus'
 
 export interface Job {
     id: string
@@ -15,6 +15,8 @@ export interface Job {
     created_at: string
 }
 
-export type JobForm = Omit<Job, 'id' | 'created_at'>
+export type JobForm = Omit<Job, 'id' | 'created_at' | 'applied_at'> & {
+    applied_at?: string
+}
 
 export type JobUpdate = Partial<JobForm>
