@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import JobFormModal from '@/components/JobFormModal.vue'
+import TableJobs from '@/components/TableJobs.vue';
 
 
 const isModalOpen = ref(false)
@@ -11,4 +12,5 @@ const isModalOpen = ref(false)
   <AppHeader @open-modal="isModalOpen = true" />
   <JobFormModal v-if="isModalOpen" @close="isModalOpen = false" />
 
+  <TableJobs/>
 </template>
