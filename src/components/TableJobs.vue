@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useJobStore } from '@/stores/jobs'
 import { Pencil, Trash2 } from 'lucide-vue-next'
@@ -33,15 +33,18 @@ function formatDate(date: string): string {
   })
 }
 
-// async function handleDelete(id: string) {
-//   if (confirm('Supprimer cette candidature ?')) {
-//     await store.deleteJob(id)
-//   }
-// }
+
+const selectedStatus = ref<JobStatus | 'Tous'>('Tous')
+
+const filteredJobs = computed(() => {
+  if (selectedStatus.value === 'Tous') return jobs.value
+  return store.jobsByStatus(selectedStatus.value as JobStatus)
+})
+
 </script>
 
 <template>
-  <FilterStatus/>
+  <FilterStatus v-model="selectedStatus" class="mb-4" />
   <!-- Loading -->
   <div v-if="loading" class="flex justify-center p-8">
     <span class="loading loading-spinner text-emerald-300" />
@@ -62,13 +65,13 @@ function formatDate(date: string): string {
           <th>Poste</th>
           <th>Type</th>
           <th>Statut</th>
-          <th>Date</th>
+          <th>Date de candidature</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="(job, index) in jobs"
+          v-for="(job, index) in filteredJobs"
           :key="job.id"
           class="hover:bg-base-300"
         >
@@ -104,9 +107,9 @@ function formatDate(date: string): string {
         </tr>
 
         <!-- Vide -->
-        <tr v-if="!jobs.length">
+        <tr v-if="!filteredJobs.length">
           <td colspan="7" class="text-center text-base-content/40 py-8">
-            Aucune candidature pour le moment
+            Aucune candidature pour ce statut
           </td>
         </tr>
 
