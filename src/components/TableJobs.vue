@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useJobStore } from '@/stores/jobs'
 import { Pencil, Trash2 } from 'lucide-vue-next'
 import type { JobStatus, JobType } from '@/types/job'
+import FilterStatus from './FilterStatus.vue'
 
 const store = useJobStore()
 const { jobs, loading, error } = storeToRefs(store)
@@ -40,6 +41,7 @@ function formatDate(date: string): string {
 </script>
 
 <template>
+  <FilterStatus/>
   <!-- Loading -->
   <div v-if="loading" class="flex justify-center p-8">
     <span class="loading loading-spinner text-emerald-300" />

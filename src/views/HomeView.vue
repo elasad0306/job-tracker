@@ -12,6 +12,5 @@ const isModalOpen = ref(false)
 <template>
   <AppHeader @open-modal="isModalOpen = true" />
   <JobFormModal v-if="isModalOpen" @close="isModalOpen = false" />
-  <FilterStatus/>
   <TableJobs/>
 </template>
